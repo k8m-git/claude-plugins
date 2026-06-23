@@ -1,0 +1,10 @@
+{
+  "name": "git-worktree",
+  "description": "Create git worktrees for parallel branch work. Includes Gotchas for common pitfalls.",
+  "version": "1.0.0",
+  "author": {
+    "name": "k8m-git"
+  },
+  "homepage": "https://github.com/k8m-git/claude-plugins",
+  "license": "MIT"
+}

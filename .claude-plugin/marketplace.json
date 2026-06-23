@@ -1,0 +1,24 @@
+{
+  "name": "k8m-plugins",
+  "owner": {
+    "name": "k8m-git",
+    "email": "ai@purpom-media-lab.com"
+  },
+  "plugins": [
+    {
+      "name": "git-worktree",
+      "source": "./plugins/git-worktree",
+      "description": "Create git worktrees for parallel branch work. Includes Gotchas for common pitfalls."
+    },
+    {
+      "name": "recap",
+      "source": "./plugins/recap",
+      "description": "Display a summary of the current conversation context. Useful after /compact or when resuming work."
+    },
+    {
+      "name": "cleanup-desktop",
+      "source": "./plugins/cleanup-desktop",
+      "description": "Auto-organize macOS Desktop files into screenshots, docs, archives, videos, and images folders."
+    }
+  ]
+}
