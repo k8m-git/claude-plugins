@@ -1,0 +1,10 @@
+{
+  "name": "workspace-skill-review",
+  "description": "Audit your Claude Code skills against 8 quality axes (description triggers, Gotchas, progressive disclosure, skill memory, etc). Scores each skill and surfaces top improvement candidates.",
+  "version": "1.0.0",
+  "author": {
+    "name": "k8m-git"
+  },
+  "homepage": "https://github.com/k8m-git/claude-plugins",
+  "license": "MIT"
+}

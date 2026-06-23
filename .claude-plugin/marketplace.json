@@ -19,6 +19,16 @@
       "name": "cleanup-desktop",
       "source": "./plugins/cleanup-desktop",
       "description": "Auto-organize macOS Desktop files into screenshots, docs, archives, videos, and images folders."
+    },
+    {
+      "name": "workspace-review",
+      "source": "./plugins/workspace-review",
+      "description": "Review Claude Code workspace structure. Detects drift between CLAUDE.md and actual files."
+    },
+    {
+      "name": "workspace-skill-review",
+      "source": "./plugins/workspace-skill-review",
+      "description": "Audit Claude Code skills against 8 quality axes. Scores each skill and surfaces top improvement candidates."
     }
   ]
 }
