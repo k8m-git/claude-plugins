@@ -192,3 +192,15 @@ Check both if `settings.local.json` exists — personal hooks may be defined the
 **"Always do X" → hook migration requires care**
 Hooks are code and have maintenance cost.
 Low-frequency or conditional instructions may be better left in CLAUDE.md or a skill.
+
+**CLAUDE.md not found when starting from an unrelated directory**
+The walk-up loop may reach `/` without finding CLAUDE.md.
+If `$WORKSPACE` becomes `/`, ask the user to specify the project root manually.
+
+**Don't flag hardcoded org-specific values as "should be generalized"**
+Skills with hardcoded Slack channel IDs, Linear org names, etc. are intentional.
+Mark them as "org-specific skill — appropriate as-is" rather than suggesting generalization.
+
+**Symlinked skills (scan, similar, etc.) are plugin-managed**
+Symlinks under `.claude/skills/` pointing to `../plugins/` are managed by a plugin.
+Note "plugin-managed — edits belong in the plugin source" rather than editing directly.
