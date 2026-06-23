@@ -4,6 +4,8 @@ description: >
   Scores each skill and surfaces top improvement candidates.
   Triggered by "review my skills", "skill review", "audit skills", "skill quality check",
   "check skill quality", "improve my skills".
+  Pass a skill name as argument to review a single skill (e.g. /workspace-skill-review checkin).
+argument-hint: "[skill-name (omit for all skills). Comma-separated for multiple]"
 ---
 
 # Workspace Skill Review — Skill Quality Audit
@@ -39,6 +41,17 @@ CI/CD & Deployment / Runbooks / Infrastructure Operations
 ## Procedure
 
 ### Phase 1: Collect Skill List
+
+**If an argument is provided (single or comma-separated skill names)**:
+Split the argument by comma to get a list of skill names.
+For each name, look for `SKILL.md` in this order:
+1. `~/.claude/skills/<name>/SKILL.md`
+2. `<workspace>/.claude/skills/<name>/SKILL.md`
+
+Read only the found files and proceed to Phase 2.
+If a skill name is not found, report "Skill `<name>` not found" and stop.
+
+**If no argument is provided (all skills)**:
 
 Detect the workspace root automatically:
 
