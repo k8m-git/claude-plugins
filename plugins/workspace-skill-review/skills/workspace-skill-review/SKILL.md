@@ -36,6 +36,20 @@ Library & API Reference / Product Verification / Data Fetching & Analysis /
 Business Process Automation / Code Scaffolding / Code Quality & Review /
 CI/CD & Deployment / Runbooks / Infrastructure Operations
 
+## Additional Axes (multi-agent orchestration skills only)
+
+Skills whose `allowed-tools` includes `Agent` / `TeamCreate` / `SendMessage` etc. (e.g. dev-kickoff-style
+skills) get 2 extra checks on top of the 8 axes. **Skip these for skills that don't orchestrate other
+agents** (the 32-point max is unaffected — these are reported separately).
+
+| # | Axis | What to evaluate |
+|---|---|---|
+| A | **Model division of labor (Orchestrator-Workers)** | Does each invoked agent have a model tier suggestion (opus/sonnet/haiku), chosen by the cost of a wrong judgment/rollback? |
+| B | **Mechanical repetition extracted into Dynamic Workflows** | Is a judgment-free loop ("retry fix→test N times") expressed as workflow-tool script (`while`/`pipeline()`) rather than left as prose steps? |
+
+Score with the same ◎/○/△/✕ scale. In Phase 3, flag gaps on these 2 axes as
+"orchestration-specific findings" separate from the main 32-point ranking.
+
 ---
 
 ## Procedure
@@ -68,7 +82,10 @@ ls "$WORKSPACE/.claude/skills/" 2>/dev/null || echo "no project skills"
 Read each `SKILL.md` found. If there are more than 10 skills, use an **Explore agent for parallel
 loading** to avoid excessive context consumption — have it return only the scores.
 
-### Phase 2: Score Each Skill (8 axes)
+While reading, check whether `allowed-tools` includes `Agent` / `TeamCreate` / `SendMessage` etc.,
+and flag those skills as "orchestration-type" (they get axes A/B in Phase 2).
+
+### Phase 2: Score Each Skill (8 axes, + A/B for orchestration-type skills)
 
 Rate each axis with:
 
@@ -101,6 +118,15 @@ Output a scoring table:
 - Only in-conversation memory → △
 - No memory at all → ✕
 
+Output a separate table for orchestration-type skills' axes A/B (not included in the 32-point total):
+
+```
+| Skill | A model-tiering | B loop-extraction | Notes |
+|-------|-----------------|--------------------|-------|
+| some-orchestrator | ◎ | ✕ | loop still prose |
+...
+```
+
 ### Phase 3: Priority Report
 
 Present the bottom 3–5 skills as "improvement candidates". For each:
@@ -111,6 +137,8 @@ Priority order:
 1. ③ Gotchas absent (✕) on an actively used skill → highest priority
 2. ① No trigger words in description → high risk of never being found
 3. ④ No progressive disclosure AND over 150 lines → context waste
+4. Orchestration-type skill with A/B at ✕/△ → likely wasting model cost or forcing manual
+   intervention on every retry loop
 
 ### Phase 4: Apply Fixes (after user approval)
 

@@ -120,6 +120,17 @@ Evaluate against official best practices.
 - Scripts/commands referenced by hooks actually exist?
 - Any hooks that are no longer needed?
 
+**Output styles check:**
+- Check whether `.claude/output-styles/` exists.
+- If unused, optionally suggest the built-in styles (Proactive / Explanatory / Learning) — not required.
+
+**Leftover worktrees:**
+```bash
+find "$WORKSPACE" -maxdepth 3 -type d -name "*.worktrees" 2>/dev/null
+```
+Check whether stale branches (likely already merged/finished) remain under `*.worktrees/`.
+When in doubt, just list them — don't suggest deletion.
+
 ### Phase 4: Rules File Check
 
 For each file under `.claude/rules/`:
